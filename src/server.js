@@ -2,8 +2,12 @@ const express = require("express");
 
 const app = express();
 
+
+
 // Allows POST requests to have JSON body content
 app.use(express.json());
+
+
 
 app.get("/", (request, response, next) => {
 
@@ -12,6 +16,9 @@ app.get("/", (request, response, next) => {
         message: "Hello World!"
     });
 });
+
+const blogRouter = require("./controllers/BlogRouter");
+app.use("/blogs", blogRouter);
 
 app.get("*", (request, response, next) => {
     response.status(404).json({
@@ -30,3 +37,4 @@ app.use((error, request, response, next) => {
 module.exports = {
     app
 }
+
