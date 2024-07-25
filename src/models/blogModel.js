@@ -10,11 +10,11 @@ const blogSchema = mongoose.Schema({
         required: true
     },
     author: {
-        type: String, // come back later and replace this with a mongoose obj ID
+        type: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, // One to Many relationship
         required: true
     },
     likes: {
-        type: [String], // come back later and replace this with a mongoose obj ID
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}], // Many to Many relationships
         required: false
     },
     headerImage: {
