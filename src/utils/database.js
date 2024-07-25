@@ -7,6 +7,19 @@ async function databaseConnect(){
     console.log("Database connecting completed!");
 };
 
+async function databaseClose(){
+    // Disconnect from db
+    await mongoose.connection.close();
+    console.log("DB disconnected");
+}
+
+async function databaseClear(){
+    // Delete all data in db
+    await mongoose.connection.db.dropDatabase();
+}
+
 module.exports = {
-    databaseConnect
+    databaseConnect,
+    databaseClose,
+    databaseClear
 }

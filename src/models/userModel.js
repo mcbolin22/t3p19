@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { commentSchema } = require("./commentSchema")
 
 const UserSchema = mongoose.Schema({
     username: {
@@ -11,11 +12,11 @@ const UserSchema = mongoose.Schema({
         required: false,
         unique: false
     },
-    comments: {
-        // These arent the same comments as the Blog contain, they reuse the CommentSchema
-        types: [commentSchema],
-        required: false
-    }
+    // comments: {
+    //     // These arent the same comments as the Blog contain, they reuse the CommentSchema
+    //     types: [commentSchema],
+    //     required: false
+    // }
 });
 
 const UserModel = mongoose.model("User", UserSchema);
