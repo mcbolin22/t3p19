@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { CommentSchema } = require("./commentModel");
+const { CommentSchema } = require("./commentSchema");
 
 const blogSchema = mongoose.Schema({
     title: {
@@ -11,7 +11,8 @@ const blogSchema = mongoose.Schema({
         required: true
     },
     author: {
-        type: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, // One to Many relationship
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User", // One to Many relationship
         required: true
     },
     likes: {
