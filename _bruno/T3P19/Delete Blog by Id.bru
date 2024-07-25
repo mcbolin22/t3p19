@@ -1,0 +1,17 @@
+meta {
+  name: Delete Blog by Id
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:3000/blogs
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "66a1dd49c624be1b5ca69622"
+  }
+}
