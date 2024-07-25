@@ -10,6 +10,11 @@ const UserSchema = mongoose.Schema({
         type: [{ type: mongoose.Schema.Types.ObjectId, ref:"Blog"}],
         required: false,
         unique: false
+    },
+    comments: {
+        // These arent the same comments as the Blog contain, they reuse the CommentSchema
+        types: [commentSchema],
+        required: false
     }
 });
 

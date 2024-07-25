@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { CommentSchema } = require("./commentModel");
 
 const blogSchema = mongoose.Schema({
     title: {
@@ -28,11 +29,19 @@ const blogSchema = mongoose.Schema({
     },
     categories: { // post category defined by website admin/developer
         type: [String], // ["travel", "anime"]
-        enum: ["life", "travel", "photography", "coding"],
+        enum: ["life", "travel", "photography", "coding"], // special data type that enables for a variable to be a set of predefined constants
         required: true
     },
     editHistory: {
         type: [{user: String, timestamp: Date}],
+        required: false
+    },
+    /* This is what we would write if we do not use subdocuments:
+    commentAsObj: {
+        type: [{userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, content: {type: String}}]
+    },*/ // This is what we woould write if we DO use subdocuments:
+    comments: {
+        type: [CommentSchema],
         required: false
     }
 },
