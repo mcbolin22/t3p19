@@ -28,6 +28,14 @@ async function seedUsers () {
 
     console.log("Creating users from insertMany:"); 
     let result = await UserModel.insertMany(userData)
+
+    // If you had to do the presave hook on array of seed data (insertMany) use the following.
+    // The following loops through the array of user data and returns array of promises and returns array of users after Promise.all has finished. 
+    // let result2 = await Promise.all(userData.map(async (user) => {
+    //     let newUser = await UserModel.create(user);
+    //     return newUser;
+    // }));
+
     console.log([...result, Brock]);
     return [...result, Brock];
 }
