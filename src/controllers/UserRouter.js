@@ -1,5 +1,6 @@
 const express = require("express");
 const { UserModel } = require("../models/userModel"); // Need this imported somewhere in the server code to make the server connection use Users
+const { comparePasswords, createJWT } = require("../utils/authHelpers");
 const router = express.Router();
 
 router.get("/", async (request, response, next) =>{
@@ -83,5 +84,37 @@ router.delete("/", async (request, response, next) =>{
         result: result
     });
 });
+
+// Login route
+router.post("/jwt", async (request, response, next) => {
+    let newJWT = "";
+
+    if (!request.body.password || !request.body.username){
+        return next(new Error("Missing username or password in login request"));
+    }
+
+    // Find user by username in DB
+    let foundUser = await UserModel.findOne({username: request.body.username}).exec();
+
+    // Compare request.body.password to foundUser.password using the compare function
+    let isPasswordCorrect = await comparePasswords(request.body.password, foundUser.password);
+
+    // Create a JWT based on foundUser._id
+    if (isPasswordCorrect){
+
+        newJWT = createJWT(foundUser._id);
+
+        response.json({
+            jwt: newJWT
+        });
+    } else {
+        return next(new Error("Incorrect password."));
+    }
+
+    
+});
+
+// Validate JWT route
+
 
 module.exports = router;
