@@ -3,6 +3,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 async function databaseConnect(){
+
+    // if (process.env.NODE_ENV == "production"){ // Use this for Production access
+    //     databaseURL = process.env.DATABASE_URL_PROD
+    // }
+    
     let databaseURL = process.env.DATABASE_URL || "mongodb://localhost:27017/blogDB";
 
     await mongoose.connect(databaseURL);
