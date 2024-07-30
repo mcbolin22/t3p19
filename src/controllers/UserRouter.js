@@ -50,6 +50,8 @@ router.post("/", async (request, response, next) =>{
         return error
     });
 
+    let jwt = createJWT(result._id);
+
     if (result.errors) {
         return next(result);
     }
